@@ -11,22 +11,8 @@ runs:
   using: "composite"
   steps:
     - id: install-snyk
-      run: |
-        curl -O -s -L "https://static.snyk.io/cli/latest/snyk-linux"
-        curl -O -s -L "https://static.snyk.io/cli/latest/snyk-linux.sha256"
-
-        if sha256sum -c snyk-linux.sha256; then
-          echo "Snyk binary checksum passed, updating"
-          mv snyk-linux ./snyk
-          chmod +x ./snyk
-          SNYK_VERSION=$(./snyk --version | cut -d' ' -f1)
-          rm "snyk-linux.sha256"
-          exit 0
-        else
-          echo "Snyk Binary Checksum Failed!"
-          exit 1
-        fi
+      run: ${{ github.action_path }}/install_posix.sh
       shell: bash
     - id: run-snyk-test
-      run: ./snyk monitor --org=${{ inputs.organization }} ${{ inputs.arguments }}
+      run: ${{ steps.vars.outputs.snyk_path }} monitor --org=${{ inputs.organization }} ${{ inputs.arguments }}
       shell: bash
