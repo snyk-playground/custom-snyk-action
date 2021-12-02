@@ -1,5 +1,5 @@
 name: "Custom Snyk Action"
-description: "Run Snyk Test"
+description: "Run's a Snyk Monitor requiring an org name"
 inputs:
   organization:
     description: "Snyk Organization ID or Name"
@@ -28,5 +28,5 @@ runs:
         fi
       shell: bash
     - id: run-snyk-test
-      run: ./snyk test --org=${{ inputs.organization }} ${{ inputs.arguments }}
+      run: ./snyk monitor --org=${{ inputs.organization }} ${{ inputs.arguments }}
       shell: bash

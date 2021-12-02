@@ -6,7 +6,7 @@ on:
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: Run a Snyk test
+    name: Run a Snyk Monitor
     steps:
       - uses: actions/checkout@v2
       - id: snyk-test
@@ -14,3 +14,5 @@ jobs:
         with:
           organization: angrydome
           arguments: --severity=critical
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
