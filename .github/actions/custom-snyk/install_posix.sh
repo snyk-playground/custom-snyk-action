@@ -4,7 +4,7 @@
 
 set -eou pipefail
 
-SNYK_BUILD="${1:=linux}"
+SNYK_BUILD="linux"
 
 SNYK_LATEST=$(curl -s -L "https://static.snyk.io/cli/latest/version")
 
