@@ -1,4 +1,7 @@
-on: [demand]
+name: Checkout and Run Snyk
+
+on:
+  workflow_dispatch:
 
 jobs:
   hello_world_job:
