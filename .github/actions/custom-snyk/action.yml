@@ -1,5 +1,5 @@
 name: "Custom Snyk Action"
-description: "Run's a Snyk Monitor requiring an org name"
+description: "Run a Snyk Monitor requiring an org name"
 inputs:
   organization:
     description: "Snyk Organization ID or Name"
