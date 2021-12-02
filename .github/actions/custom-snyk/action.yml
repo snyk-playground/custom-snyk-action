@@ -28,5 +28,5 @@ runs:
         fi
       shell: bash
     - id: run-snyk-test
-      run: snyk test --org=${{ inputs.organization }} ${{ inputs.arguments }}
+      run: ./snyk test --org=${{ inputs.organization }} ${{ inputs.arguments }}
       shell: bash
