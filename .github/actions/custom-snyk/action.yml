@@ -4,6 +4,9 @@ inputs:
   organization:
     description: "Snyk Organization ID or Name"
     required: true
+  snyk-version:
+    description: "Which Snyk version to install"
+    default: latest
   arguments:
     description: "Extra Snyk CLI options"
     required: false
@@ -11,8 +14,8 @@ runs:
   using: "composite"
   steps:
     - id: install-snyk
-      run: /bin/bash ${{ github.action_path }}/install_posix.sh
+      run: ${{ github.action_path }}/install_posix.sh ${{ inputs.snyk-version }} ${{ runner.os }}
       shell: bash
     - id: run-snyk-test
-      run: ${{ steps.install-snyk.outputs.snyk_path }} monitor --org=${{ inputs.organization }} ${{ inputs.arguments }}
+      run: snyk monitor --org=${{ inputs.organization }} ${{ inputs.arguments }}
       shell: bash
