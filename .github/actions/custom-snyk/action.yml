@@ -13,7 +13,7 @@ runs:
     - id: install-snyk
       run: |
         curl -O -s -L "https://static.snyk.io/cli/latest/snyk-linux"
-        curl -O -s -L "https://static.snyk.io/cli/latestsnyk-linux.sha256"
+        curl -O -s -L "https://static.snyk.io/cli/latest/snyk-linux.sha256"
 
         if sha256sum -c snyk-linux.sha256; then
           echo "Snyk binary checksum passed, updating"
