@@ -11,7 +11,7 @@ runs:
   using: "composite"
   steps:
     - id: install-snyk
-      run: ${{ github.action_path }}/install_posix.sh
+      run: /bin/bash ${{ github.action_path }}/install_posix.sh
       shell: bash
     - id: run-snyk-test
       run: ${{ steps.vars.outputs.snyk_path }} monitor --org=${{ inputs.organization }} ${{ inputs.arguments }}
