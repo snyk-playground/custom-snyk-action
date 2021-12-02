@@ -24,7 +24,7 @@ die () {
 echo "Installing the $1 version of Snyk on $2"
 
 if [ "$1" == "latest" ]; then
-    SNYK_VERSION=$(curl -s -L"https://static.snyk.io/cli/latest/version")
+    SNYK_VERSION=$(curl -s -L https://static.snyk.io/cli/latest/version)
 else
     SNYK_VERSION="${1}"
 fi
