@@ -1,0 +1,13 @@
+on: [demand]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Run a Snyk test
+    steps:
+      - uses: actions/checkout@v2
+      - id: snyk-test
+        uses: ./.github/actions/custom-snyk
+        with:
+          organization: angrydome
+          arguments: --severity=critical

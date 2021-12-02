@@ -1,0 +1,32 @@
+name: "Custom Snyk Action"
+description: "Run Snyk Test"
+inputs:
+  organization:
+    description: "Snyk Organization ID or Name"
+    required: true
+  arguments:
+    description: "Extra Snyk CLI options"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - id: install-snyk
+      run: |
+        curl -O -s -L "https://static.snyk.io/cli/latest/snyk-linux"
+        curl -O -s -L "https://static.snyk.io/cli/latestsnyk-linux.sha256"
+
+        if sha256sum -c snyk-linux.sha256; then
+          echo "Snyk binary checksum passed, updating"
+          mv snyk-linux ./snyk
+          chmod +x ./snyk
+          SNYK_VERSION=$(./snyk --version | cut -d' ' -f1)
+          rm "snyk-linux.sha256"
+          exit 0
+        else
+          echo "Snyk Binary Checksum Failed!"
+          exit 1
+        fi
+      shell: bash
+    - id: run-snyk-test
+      run: snyk test --org=${{ inputs.organization }} ${{ inputs.arguments }}
+      shell: bash
